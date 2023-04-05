@@ -1,7 +1,9 @@
 import path from "path";
 import express from 'express';
 import mongoose from 'mongoose';
+import bodyParser from 'body-parser'
 import config from './db_config.js'
+import empRoutes from './emp.routes_unsecured.js'
 
 
 const PORT = config.port;
@@ -24,6 +26,10 @@ mongoose.connection.once('open', () => {
 
 var app = express();
 
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true}))
+
+app.use('/', empRoutes)
 app.use(function ( req, res, next) {
     res.send('This page does not exist!')
 });
