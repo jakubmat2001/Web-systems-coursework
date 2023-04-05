@@ -1,6 +1,7 @@
 import path from "path";
-import express from express;
+import express from 'express';
 import mongoose from 'mongoose';
+import config from './db_config.js'
 
 
 const PORT = config.port;
