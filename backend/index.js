@@ -1,9 +1,10 @@
-import path from "path";
+
 import express from 'express';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser'
 import config from './db_config.js'
-import empRoutes from './emp.routes_unsecured.js'
+import empRoutes from './emp.routes.js'
+import authRoutes from './auth.routes.js'
 
 
 const PORT = config.port;
@@ -30,6 +31,18 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true}))
 
 app.use('/', empRoutes)
+app.use('/', authRoutes)
+
+
+app.use((err, req, res, next) => {
+  if (err.name === 'UnauthorizedError') {
+    res.status(401).json({ "error": err.name + ": " + err.message })
+  } else if (err) {
+    res.status(400).json({ "error": err.name + ": " + err.message, "stack": err.stack })
+    console.log(err)
+  }
+})
+
 app.use(function ( req, res, next) {
     res.send('This page does not exist!')
 });
