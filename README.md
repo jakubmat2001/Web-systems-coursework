@@ -17,6 +17,7 @@ Minor fixes here and there, adding required imports
 # Commit nr 3:
 Added functioning and working signup backend allowing for a signup with an name, email and password
 
+
 # Commit nr 4:
 Updated Read.md files as it has some spelling mistakes
 
