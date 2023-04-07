@@ -1,0 +1,25 @@
+/* similar syling effects we have seen in logoff.js reused again a.k.a code re-use*/
+
+.signup-success {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 4rem);
+    text-align: center;
+  }
+  
+  .signup-success h1 {
+    font-size: 2.5rem;
+    color: #4CAF50;
+    animation: fadeOut 2s linear forwards;
+  }
+  
+  @keyframes fadeOut {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  

@@ -23,3 +23,9 @@ Updated Read.md files as it has some spelling mistakes
 
 # Commit nr 5:
 Added authentication to the backend though the signin option
+
+# Commit nr 6:
+Resolving minor merge issues
+
+# Commit nr 7:
+Added CSS, frontent login and routing

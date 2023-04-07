@@ -1,0 +1,25 @@
+#error-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 2rem;
+    font-size: 1.2rem;
+  }
+  
+  #error-page h1 {
+    font-size: 3rem;
+    color: #F44336;
+    margin-bottom: 1rem;
+  }
+  
+  #error-page p {
+    margin-bottom: 1rem;
+  }
+  
+  #error-page i {
+    color: #757575;
+  }
+  
+  

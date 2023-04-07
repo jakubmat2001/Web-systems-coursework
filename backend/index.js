@@ -2,6 +2,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser'
+
 import config from './db_config.js'
 import empRoutes from './emp.routes.js'
 import authRoutes from './auth.routes.js'
@@ -26,6 +27,13 @@ mongoose.connection.once('open', () => {
 });
 
 var app = express();
+
+app.use(/^\/(api\/emps|auth\/signin)/, (req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+  next();
+});
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true}))

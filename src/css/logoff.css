@@ -1,0 +1,26 @@
+
+/* simple css aside from min-heigh which sets a minimum size of our logoff and the text fade out*/
+.logoff {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 4rem);
+    text-align: center;
+  }
+
+  .logoff h1 {
+    font-size: 2.5rem;
+    color: #4CAF50;
+    animation: fadeOut 2s linear forwards;
+  }
+  
+  /* a nice effect causing the "You're Loged Off Now" to fade over the span of 2sec */
+  @keyframes fadeOut {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  
