@@ -2,31 +2,48 @@ import mongoose from 'mongoose'
 import crypto from 'crypto'
 
 const EmpSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        trim: true,
-        required: 'Name is required'
-      },
-      email: {
-        index: true,
-        type: String,
-        trim: true,
-        unique: true,
-        match: [/.+\@.+\..+/, 'Please fill a valid email address'],
-        required: 'Email is required'
-      },
-      hashed_password: {
-        type: String,
-        required: "Password is required"
-      },
-      salt: String,
-      updated: Date,
+  name: {
+    type: String,
+    trim: true,
+    required: 'Name is required'
+  },
+  email: {
+    index: true,
+    type: String,
+    trim: true,
+    unique: true,
+    match: [/.+\@.+\..+/, 'Please fill a valid email address'],
+    required: 'Email is required'
+  },
+  hashed_password: {
+    type: String,
+    required: "Password is required"
+  },
 
-      created: {
-        type: Date,
-        default: Date.now
-}});
-
+  //we use min field to ensure that the employee cannot get negative number
+  salt: String,
+  updated: Date,
+  hourly_pay_rate: {
+    type: Number,
+    min: 0
+  },
+  expertise_level: {
+    type: String,
+    enum: ['Junior', 'Mid-Senior', 'Senior']
+  },
+  human_resources: {
+    type: Number,
+    min: 0
+  },
+  hours_of_work: {
+    type: Number,
+    min: 0
+  },
+  created: {
+    type: Date,
+    default: Date.now
+  }
+});
 
 
 EmpSchema

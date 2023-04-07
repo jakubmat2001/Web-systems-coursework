@@ -12,25 +12,31 @@ const getUniqueErrorMessage = (err) => {
     return output
 }
 
+// dbErrorHandler.js
 const getErrorMessage = (err) => {
-    let message = ''
-
+    let message = '';
+  
     if (err.code) {
-        switch (err.code) {
-            case 11000:
-            case 11001:
-                message = getUniqueErrorMessage(err)
-                break
-            default:
-                message = 'Something went wrong'
-        }
+      switch (err.code) {
+        case 11000:
+        case 11001:
+          message = getUniqueErrorMessage(err);
+          break;
+        default:
+          message = 'Something went wrong';
+      }
     } else {
-        for (let errName in err.errors) {
-            if (err.errors[errName].message) message = err.errors[errName].message
-        }
+      for (let errName in err.errors) {
+        if (err.errors[errName].message) message = err.errors[errName].message;
+      }
     }
-
-    return message
-}
-
-export default {getErrorMessage}
+  
+    return {
+      message: message,
+      name: err.name,
+      stack: err.stack,
+    };
+  };
+  
+  export default { getErrorMessage };
+  

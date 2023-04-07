@@ -89,19 +89,22 @@ try {
 }
 
 
+// emp.controller.js
 const remove = async (req, res) => {
-    try {
-      let emp = req.profile
-      let deletedemp = await emp.remove()
-      deletedemp.hashed_password = undefined
-      deletedemp.salt = undefined
-      res.json(deletedemp)
-    } catch (err) {
-      return res.status(400).json({
-        error: errorHandler.getErrorMessage(err)
-      })
-    }
+  try {
+    let emp = req.profile;
+    let deletedemp = await Emp.deleteOne({ _id: emp._id });
+    deletedemp.hashed_password = undefined;
+    deletedemp.salt = undefined;
+    res.json(deletedemp);
+  } catch (err) {
+    console.log("error occurred");
+    return res.status(400).json({
+      error: errorHandler.getErrorMessage(err),
+    });
   }
+};
+
 
 
 export default {

@@ -29,3 +29,7 @@ Resolving minor merge issues
 
 # Commit nr 7:
 Added CSS, frontent login and routing
+
+# Commit nr 8:
+Fixed backend to use authorisation for deleting/updating users
+Added extra fields for the employee schema
