@@ -1,7 +1,6 @@
 import Emp from './emp.models.js'
 import lodash from 'lodash'
 import errorHandler from './dbErrorHandler.js'
-import userEvent from '@testing-library/user-event'
 
 const create = async (req, res) => {
     const emp = new Emp(req.body)
@@ -46,31 +45,11 @@ const empByID = async (req, res, next, id) => {
     }
   }
 
-const empByName = async (req, res, next, id) => {
-    try {
-        console.log("Finding employee by name: " + id)
-        let emp = await Emp.findOne({name: id});
-        if (!emp)
-            return res.status(400).json({
-                error: "Employee not found"
-            })
-        req.profule = emp
-        next()
-    }catch (err) {
-        return res.status(400).json({
-            error: "Could not retive employee by name: " + err
-        })
-    }
-}
-
-
-
 const read = (req, res) => {
 req.profile.hashed_password = undefined
 req.profile.salt = undefined
 return res.json(req.profile)
 }
-
 
 const update = async (req, res) => {
 try {
@@ -88,7 +67,6 @@ try {
 }
 }
 
-
 // emp.controller.js
 const remove = async (req, res) => {
   try {
@@ -105,14 +83,11 @@ const remove = async (req, res) => {
   }
 };
 
-
-
 export default {
   create,
   empByID,
-  empByName,
   read,
   list,
   remove,
-  update
+  update,
 }

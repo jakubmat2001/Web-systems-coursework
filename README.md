@@ -33,3 +33,7 @@ Added CSS, frontent login and routing
 # Commit nr 8:
 Fixed backend to use authorisation for deleting/updating users
 Added extra fields for the employee schema
+
+# Commit nr 9:
+Improved folder structure (more organized), added functionality to create a quote from an authenticated user
+Displays all the quotes in our database in the project/view-only-project pages

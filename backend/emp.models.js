@@ -19,32 +19,14 @@ const EmpSchema = new mongoose.Schema({
     type: String,
     required: "Password is required"
   },
-
-  //we use min field to ensure that the employee cannot get negative number
+  
   salt: String,
   updated: Date,
-  hourly_pay_rate: {
-    type: Number,
-    min: 0
-  },
-  expertise_level: {
-    type: String,
-    enum: ['Junior', 'Mid-Senior', 'Senior']
-  },
-  human_resources: {
-    type: Number,
-    min: 0
-  },
-  hours_of_work: {
-    type: Number,
-    min: 0
-  },
   created: {
     type: Date,
     default: Date.now
   }
 });
-
 
 EmpSchema
   .virtual('password')
@@ -78,8 +60,6 @@ EmpSchema
     }
   } 
 
-
-
 EmpSchema.path('hashed_password').validate(function(v) {
     if (this._password && this._password.length < 6) {
         this.invalidate('password', 'Password must be at least 6 characters.')
@@ -89,8 +69,6 @@ EmpSchema.path('hashed_password').validate(function(v) {
     }
     }, null)
 
-
-    
 
 const empModel = mongoose.model('Emp', EmpSchema);
 empModel.createIndexes();

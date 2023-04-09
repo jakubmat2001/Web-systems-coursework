@@ -6,6 +6,7 @@ import bodyParser from 'body-parser'
 import config from './db_config.js'
 import empRoutes from './emp.routes.js'
 import authRoutes from './auth.routes.js'
+import quoteRoutes from './quote.routes.js';
 
 
 const PORT = config.port;
@@ -28,9 +29,10 @@ mongoose.connection.once('open', () => {
 
 var app = express();
 
-app.use(/^\/(api\/emps|auth\/signin)/, (req, res, next) => {
+//applied CORS to multiple routes
+app.use(/^\/(api\/emps|auth\/signin|api\/quotes)/, (req, res, next) => {
   res.header("Access-Control-Allow-Origin", "http://localhost:3000");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
   res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
   next();
 });
@@ -40,6 +42,7 @@ app.use(bodyParser.urlencoded({ extended: true}))
 
 app.use('/', empRoutes)
 app.use('/', authRoutes)
+app.use('/', quoteRoutes)
 
 
 app.use((err, req, res, next) => {

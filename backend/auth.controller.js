@@ -2,6 +2,7 @@ import Emp from './emp.models.js'
 import jwt from 'jsonwebtoken'
 import config from './db_config.js'
 import expressJwt from 'express-jwt';
+import unless from 'express-unless';
 
 const signin = async (req, res) => {
     try {
@@ -52,12 +53,10 @@ const signout = (req, res) => {
 }
 
 const requireSignin = expressJwt({
-    secret: config.jwtSecret,
-    userProperty: 'auth',
-    algorithms: ['HS256']
-  });
-
-
+  secret: config.jwtSecret,
+  userProperty: 'auth',
+  algorithms: ['HS256'],
+});
   
 const hasAuthorization = (req, res, next) => {
     const authorized = req.profile && req.auth && req.profile._id == req.auth._id
@@ -68,6 +67,24 @@ const hasAuthorization = (req, res, next) => {
     }
     next()
   }
+
+const setProfile = async (req, res, next) => {
+  try {
+    const employee = await Emp.findById(req.auth._id);
+    if (!employee) {
+      return res.status(400).json({
+        error: "Employee not found",
+      });
+    }
+    req.profile = employee;
+    next();
+  } catch (err) {
+    return res.status(400).json({
+      error: "Could not retrieve employee profile",
+    });
+  }
+};
+  
   
   
 
@@ -75,5 +92,6 @@ export default {
   signin,
   signout,
   requireSignin,
-  hasAuthorization
+  hasAuthorization,
+  setProfile,
 }
