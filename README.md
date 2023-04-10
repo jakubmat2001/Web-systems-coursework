@@ -46,3 +46,6 @@ After creating quote, an ID of their quote is displayed on a page, Delete functi
 
 # Commit nr 12:
 Fixed budget not being displayed properly, applied fudge factor, formula for the calculations of the budget is now displayed
+
+# Commit nr 13:
+Added styling to the pages which needed it the most, I'm to exausted to continue :(

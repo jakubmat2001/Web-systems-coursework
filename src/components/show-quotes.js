@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import '../css/show-quotes.css'
 
 function DisplayQuotes() {
   const [quotes, setQuotes] = useState([]);
@@ -18,12 +19,11 @@ function DisplayQuotes() {
   }, []);
 
   return (
-    <div>
-      <h1>Project Quotes</h1>
-      <p>
+    <div className="container">
+      <p className="description">
         Budget = (Work Hours * Worker Type) + Human Resources
       </p>
-      <table>
+      <table className="table">
         <thead>
           <tr>
             <th>Employee Name</th>
