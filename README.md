@@ -40,3 +40,6 @@ Displays all the quotes in our database in the project/view-only-project pages
 
 # Commit nr 10:
 Quotes are now displayed from a single component on both project/view-only-project pages
+
+# Commit nr 11:
+After creating quote, an ID of their quote is displayed on a page, Delete functionality was added

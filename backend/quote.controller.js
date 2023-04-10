@@ -32,7 +32,6 @@ const create = async (req, res) => {
     console.log("saving quote")
     res.status(200).json({ message: 'Quote created successfully', quote });
   } catch (err) {
-    console.log("some error occured")
     res.status(400).json({ error: errorHandler.getErrorMessage(err) });
   }
 };
@@ -78,11 +77,15 @@ const read = (req, res) => {
 
 //removes the quote fron our database
 const remove = async (req, res) => {
+  console.log("Remove quote: ", req.quote); 
+
   try {
     let quote = req.quote;
-    let deletedQuote = await quote.remove();
+    let deletedQuote = await Quote.deleteOne({ _id: quote._id });
+    console.log("Deleted quote: ", deletedQuote);
     res.status(200).json({ message: 'Quote deleted successfully', deletedQuote });
   } catch (err) {
+    console.log("Remove quote error: ", err);
     res.status(400).json({ error: errorHandler.getErrorMessage(err) });
   }
 };
@@ -90,8 +93,10 @@ const remove = async (req, res) => {
 //searches for a quote with a given id and adds on the employees id/email onto it to check it
 //it is used to handle any route which will use /api/quotes/:quoteId' functionalites to remove/update quotes
 const quoteByID = async (req, res, next, id) => {
+  console.log("quoteByID: ", id);
   try {
     let quote = await Quote.findById(id).populate('empId', 'name email');
+    console.log("Quote fetched: ", quote);
     if (!quote)
       return res.status(400).json({ error: 'Quote not found' });
     req.quote = quote;

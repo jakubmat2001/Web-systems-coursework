@@ -57,7 +57,6 @@ function UpdateQuote() {
       });
       navigate('/project-tab/project');
     } catch (error) {
-      console.error('Error updating quote:', error);
     }
   };
 

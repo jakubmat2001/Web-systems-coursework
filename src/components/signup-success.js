@@ -4,7 +4,7 @@ import '../css/signed-up.css';
 
 export default function ValidSignup() {
   const navigate = useNavigate();
-
+  //navigate to the App.js after 2 sec have elapsed
   useEffect(() => {
     const timer = setTimeout(() => {
       navigate('/');

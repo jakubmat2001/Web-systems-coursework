@@ -13,7 +13,10 @@ function CreateQuote() {
     console: ''
   });
 
+  //once request was successful, pull the quoteID which was created
+  //then change the state to true to dusplay it on a page
   const [quoteId, setQuoteId] = useState(null);
+  const [showQuoteId, setShowQuoteId] = useState(false);
 
   const handleChange = (name) => (event) => {
     setValues({ ...values, [name]: event.target.value });
@@ -30,7 +33,7 @@ function CreateQuote() {
   
     const token = JSON.parse(sessionStorage.getItem("auth"));
     console.log("Token from sessionStorage:", token);
-  
+    
     //sends a user back to login page when they attpmt to create quote from /create-quote page while not being loged-in
     //otherwise prepares to send token for verification in the backend
     if (token === null) {
@@ -41,26 +44,28 @@ function CreateQuote() {
           'Authorization': `Bearer ${token.token}`,
         },
       }).then((response) => {
-        sessionStorage.setItem('auth', JSON.stringify(response.data));
         setValues({ ...values, 'authorised': true });
+        console.log(response.data.quote._id)
+        setQuoteId(response.data.quote._id); 
+        setShowQuoteId(true);
       }).catch((err) => {
         console.log(err);
       });
     }
   };
   
+  
   //add a quote id for display
-
   return (
     <div className="container">
       <Header />
       <main id="detail">
         <div>
-          <h1>Create Project Quote</h1>    
-          {quoteId && (
+          <h1>Create Project Quote</h1>
+          {showQuoteId && (
             <div>
               <p>Your quote ID: {quoteId}</p>
-              <p>Please keep it safe and use it for future references</p>
+              <p>Please keep it safe and use it for updating your quote, or deleting it</p>
             </div>
           )}
           <form>
@@ -102,11 +107,11 @@ function CreateQuote() {
             <br />
             <button type="submit" value="Submit" onClick={create_q}>Create Quote</button>
           </form>
-
         </div>
       </main>
     </div>
   );
+  
 }
 
 export default CreateQuote;

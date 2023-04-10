@@ -2,7 +2,7 @@ import Emp from './emp.models.js'
 import jwt from 'jsonwebtoken'
 import config from './db_config.js'
 import expressJwt from 'express-jwt';
-import unless from 'express-unless';
+
 
 const signin = async (req, res) => {
     try {
@@ -60,11 +60,6 @@ const requireSignin = expressJwt({
   
 const hasAuthorization = (req, res, next) => {
   const authorized = req.profile && req.auth && req.profile._id == req.auth._id;
-
-  //for debuggin 
-  console.log('req.profile:', req.profile);
-  console.log('req.auth:', req.auth);
-  console.log('req.profile._id = req.auth._id:', req.profile._id == req.auth._id);
 
   if (!authorized) {
     return res.status(403).json({
