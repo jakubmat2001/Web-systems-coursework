@@ -18,13 +18,15 @@ export function calculateBudget(workHours, workerType, humanResources) {
         rate = 0;
     }
 
-    //fudge factor application
-    const randomMultiplier = 0.5 + Math.random();
-    rate = rate * randomMultiplier;
-
     //ensures that we get our values as numbers
     const budget = (parseInt(workHours) * rate) + parseInt(humanResources);
     return parseFloat(budget.toFixed(2));
   }
   
-  
+//fudge factor application
+export function calcFudgeBudget(budget) {
+  const randomMultiplier = 0.5 + Math.random();
+  const fudgeBudget = budget * randomMultiplier;
+  console.log(fudgeBudget)
+  return parseFloat(fudgeBudget.toFixed(2));
+}  

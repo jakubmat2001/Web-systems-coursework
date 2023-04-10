@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Header from '../components/header';
+//we can reuse update-quote for this due to both being identical in structure
+import '../css/update-quote.css';
 
 function CreateQuote() {
   const [values, setValues] = useState({
@@ -60,7 +62,7 @@ function CreateQuote() {
     <div className="container">
       <Header />
       <main id="detail">
-        <div>
+        <div className="form-container"> {/* Add this wrapper div */}
           <h1>Create Project Quote</h1>
           {showQuoteId && (
             <div>
@@ -111,7 +113,6 @@ function CreateQuote() {
       </main>
     </div>
   );
-  
 }
 
 export default CreateQuote;

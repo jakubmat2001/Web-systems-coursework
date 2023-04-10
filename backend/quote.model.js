@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 //Our quote schema containing all the variables which were specified in requriment section
-//Note that the human resources aren't required
+//Note that the human resources aren't required, it also contains our fudgebudget for frontend
 const QuoteSchema = new mongoose.Schema({
   employeeName: {
     type: String,
@@ -23,6 +23,9 @@ const QuoteSchema = new mongoose.Schema({
   budget: {
     type: Number,
     required: true
+  },
+  fudgeBudget: {
+    type: Number,
   },
   empId: {
     type: mongoose.Schema.Types.ObjectId,

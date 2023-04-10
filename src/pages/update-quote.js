@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import '../css/update-quote.css'
 import Header from '../components/header';
 
 function UpdateQuote() {
@@ -27,7 +28,7 @@ function UpdateQuote() {
   const fetchQuote = async () => {
     try {
       const token = JSON.parse(sessionStorage.getItem("auth")).token;
-  
+
       const response = await axios.get(`http://127.0.0.1:8000/api/quotes/${quoteId}`, {
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -44,12 +45,12 @@ function UpdateQuote() {
       console.error('Error fetching quote:', error);
     }
   };
-  
+
   const updateQuote = async (e) => {
     e.preventDefault();
     try {
       const token = JSON.parse(sessionStorage.getItem("auth")).token;
-  
+
       await axios.put(`http://127.0.0.1:8000/api/quotes/${quoteId}`, values, {
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -60,23 +61,26 @@ function UpdateQuote() {
       console.error('Error updating quote:', error.response ? error.response.data : error);
     }
   };
-  
+
 
   return (
     <div className="container">
       <Header />
       <main id="detail">
-        <div>
+        <div className="form-container">
           <h1>Update Project Quote</h1>
-          <label>
-            Quote ID:
-            <input type="text" value={quoteId} onChange={handleQuoteIdChange} />
+          <div className="quote-id-container">
+            <label>
+              Quote ID:
+              
+            </label>
+            <input id="fetch-input" type="text" value={quoteId} onChange={handleQuoteIdChange} />
             <button type="button" onClick={fetchQuote}>
               Fetch Quote
             </button>
-          </label>
+          </div>
           {quote && (
-            <form>
+            <form className="form">
               <label>
                 Employee Name:
                 <input
@@ -125,4 +129,3 @@ function UpdateQuote() {
 }
 
 export default UpdateQuote;
-

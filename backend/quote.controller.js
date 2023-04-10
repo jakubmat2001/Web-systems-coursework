@@ -1,6 +1,6 @@
 import Quote from './quote.model.js';
 import errorHandler from './dbErrorHandler.js';
-import { calculateBudget } from './calc_budget.js';
+import { calculateBudget, calcFudgeBudget } from './calc_budget.js';
 
 
 const create = async (req, res) => {
@@ -8,6 +8,7 @@ const create = async (req, res) => {
   const empId = req.profile._id;
   
   const budget = calculateBudget(workHours, workerType, humanResources);
+  const fudgeBudget = calcFudgeBudget(budget);
 
   //if human resources from our form are null, set the value to 0 as default
   //add the human resources to the budget if any
@@ -17,6 +18,7 @@ const create = async (req, res) => {
     workerType,
     humanResources: humanResources || 0, 
     budget: budget,
+    fudgeBudget: fudgeBudget,
     empId,
   });
 
@@ -39,7 +41,7 @@ const list = async (req, res) => {
   }
 };
 
-//updates the employees quote that lives in the database
+//updates the employees quote that lives in our database
 const update = async (req, res) => {
   try {
     let quote = await Quote.findById(req.params.quoteId);
@@ -53,8 +55,11 @@ const update = async (req, res) => {
     req.quoteEmployeeId = quote.empId;
 
     //ensure we update our budget upon new values being entered
+    //saves the original budget to database along with out modified fudgebudget
     const updatedBudget = calculateBudget(req.body.workHours, req.body.workerType, req.body.humanResources);
+    const updated_fudge_budget = calcFudgeBudget(updatedBudget);
     quote.budget = updatedBudget;
+    quote.fudgeBudget = updated_fudge_budget;
     quote = Object.assign(quote, req.body);
     quote.updated = Date.now();
 

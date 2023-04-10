@@ -49,3 +49,7 @@ Fixed budget not being displayed properly, applied fudge factor, formula for the
 
 # Commit nr 13:
 Added styling to the pages which needed it the most, I'm to exausted to continue :(
+
+# Commit nr 14: 
+Applied final changes to the budget, separated it into origina which goes into database to be saved and the modified to be displayed.
+More css styling to our pages added

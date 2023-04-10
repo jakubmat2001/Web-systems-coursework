@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Header from '../components/header';
+import '../css/delete-quote.css';
 
 function DeleteQuote() {
   const [quoteId, setQuoteId] = useState('');
@@ -39,7 +40,7 @@ function DeleteQuote() {
     <div className="container">
       <Header />
       <main id="delete">
-        <div>
+        <div className="form-container"> {/* Add this wrapper div */}
           <h1>Delete Project Quote</h1>
           {message && <p>{message}</p>}
           <form>
