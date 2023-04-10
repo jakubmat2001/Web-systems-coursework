@@ -1,20 +1,13 @@
 import Quote from './quote.model.js';
 import errorHandler from './dbErrorHandler.js';
+import { calculateBudget } from './calc_budget.js';
+
 
 const create = async (req, res) => {
   const { employeeName, workHours, workerType, humanResources } = req.body;
   const empId = req.profile._id;
-
-  //set the pay rate for each of the classes of workertype
-  //then multiply the hours by the payrate
-  let budget = 0;
-  if (workerType === 'junior') {
-    budget = workHours * 10;
-  } else if (workerType === 'mid-senior') {
-    budget = workHours * 20;
-  } else if (workerType === 'senior') {
-    budget = workHours * 30;
-  }
+  
+  const budget = calculateBudget(workHours, workerType, humanResources);
 
   //if human resources from our form are null, set the value to 0 as default
   //add the human resources to the budget if any
@@ -23,7 +16,7 @@ const create = async (req, res) => {
     workHours,
     workerType,
     humanResources: humanResources || 0, 
-    budget: budget + (humanResources || 0),
+    budget: budget,
     empId,
   });
 
@@ -59,6 +52,9 @@ const update = async (req, res) => {
     //attached the employeeId to the request object
     req.quoteEmployeeId = quote.empId;
 
+    //ensure we update our budget upon new values being entered
+    const updatedBudget = calculateBudget(req.body.workHours, req.body.workerType, req.body.humanResources);
+    quote.budget = updatedBudget;
     quote = Object.assign(quote, req.body);
     quote.updated = Date.now();
 
@@ -66,8 +62,10 @@ const update = async (req, res) => {
     res.status(200).json(quote);
 
   } catch (err) {
+    console.error('Update quote error:', err);
     res.status(400).json({ error: errorHandler.getErrorMessage(err) });
   }
+  
 };
 
 //read a single quote

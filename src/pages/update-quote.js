@@ -57,8 +57,10 @@ function UpdateQuote() {
       });
       navigate('/project-tab/project');
     } catch (error) {
+      console.error('Error updating quote:', error.response ? error.response.data : error);
     }
   };
+  
 
   return (
     <div className="container">

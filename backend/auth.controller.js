@@ -69,7 +69,7 @@ const hasAuthorization = (req, res, next) => {
   next();
 };
 
-
+//get's profile info about the employee based on their ID
 const setProfile = async (req, res, next) => {
   try {
     const employee = await Emp.findById(req.auth._id);
@@ -87,9 +87,6 @@ const setProfile = async (req, res, next) => {
   }
 };
   
-  
-  
-
 export default {
   signin,
   signout,

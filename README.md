@@ -43,3 +43,6 @@ Quotes are now displayed from a single component on both project/view-only-proje
 
 # Commit nr 11:
 After creating quote, an ID of their quote is displayed on a page, Delete functionality was added
+
+# Commit nr 12:
+Fixed budget not being displayed properly, applied fudge factor, formula for the calculations of the budget is now displayed
