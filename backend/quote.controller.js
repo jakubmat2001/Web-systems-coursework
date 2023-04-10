@@ -49,16 +49,31 @@ const list = async (req, res) => {
 
 //updates the employees quote that lives in the database
 const update = async (req, res) => {
-  let quote = req.quote;
-  quote = Object.assign(quote, req.body);
-  quote.updated = Date.now();
-
   try {
+    let quote = await Quote.findById(req.params.quoteId);
+    if (!quote) {
+      return res.status(400).json({
+        error: "Quote not found",
+      });
+    }
+
+    //attached the employeeId to the request object
+    req.quoteEmployeeId = quote.empId;
+
+    quote = Object.assign(quote, req.body);
+    quote.updated = Date.now();
+
     await quote.save();
     res.status(200).json(quote);
+
   } catch (err) {
     res.status(400).json({ error: errorHandler.getErrorMessage(err) });
   }
+};
+
+//read a single quote
+const read = (req, res) => {
+  return res.json(req.quote);
 };
 
 //removes the quote fron our database
@@ -86,4 +101,4 @@ const quoteByID = async (req, res, next, id) => {
   }
 };
 
-export default { create, list, quoteByID, read, update, remove };
+export default { create, list, quoteByID, update, remove, read };

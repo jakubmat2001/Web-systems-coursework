@@ -13,6 +13,8 @@ function CreateQuote() {
     console: ''
   });
 
+  const [quoteId, setQuoteId] = useState(null);
+
   const handleChange = (name) => (event) => {
     setValues({ ...values, [name]: event.target.value });
   };
@@ -41,21 +43,26 @@ function CreateQuote() {
       }).then((response) => {
         sessionStorage.setItem('auth', JSON.stringify(response.data));
         setValues({ ...values, 'authorised': true });
-        navigate('/project-tab/project');
       }).catch((err) => {
         console.log(err);
       });
     }
   };
   
-  
+  //add a quote id for display
 
   return (
     <div className="container">
       <Header />
       <main id="detail">
         <div>
-          <h1>Create Project Quote</h1>
+          <h1>Create Project Quote</h1>    
+          {quoteId && (
+            <div>
+              <p>Your quote ID: {quoteId}</p>
+              <p>Please keep it safe and use it for future references</p>
+            </div>
+          )}
           <form>
             <label>
               Employee Name:

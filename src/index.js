@@ -17,6 +17,7 @@ import ViewOnly from './pages/view-only-project.js';
 import reportWebVitals from './reportWebVitals';
 import PrivateRoute from './routes/private-route.js';
 import CreateQuote from './pages/create-quote';
+import UpdateQuote from './pages/update-quote';
 
 //added a better router which looks cleaner therefore easier to work with
 const router = (
@@ -31,6 +32,7 @@ const router = (
       <Route path="/logoff" element={<PrivateRoute><Logoff /></PrivateRoute>} />
       <Route path="/signup-success" element={<ValidSignup />} />
       <Route path='/create-quote' element={<CreateQuote/>}/>
+      <Route path='/update-quote' element={<UpdateQuote/>}/>
     </Routes>
   </BrowserRouter>
 );

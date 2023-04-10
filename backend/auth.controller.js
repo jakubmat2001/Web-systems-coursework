@@ -59,14 +59,21 @@ const requireSignin = expressJwt({
 });
   
 const hasAuthorization = (req, res, next) => {
-    const authorized = req.profile && req.auth && req.profile._id == req.auth._id
-    if (!(authorized)) {
-      return res.status(403).json({
-        error: "Employee is not authorized"
-      })
-    }
-    next()
+  const authorized = req.profile && req.auth && req.profile._id == req.auth._id;
+
+  //for debuggin 
+  console.log('req.profile:', req.profile);
+  console.log('req.auth:', req.auth);
+  console.log('req.profile._id = req.auth._id:', req.profile._id == req.auth._id);
+
+  if (!authorized) {
+    return res.status(403).json({
+      error: "Employee is not authorized"
+    });
   }
+  next();
+};
+
 
 const setProfile = async (req, res, next) => {
   try {

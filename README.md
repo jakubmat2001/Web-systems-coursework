@@ -37,3 +37,6 @@ Added extra fields for the employee schema
 # Commit nr 9:
 Improved folder structure (more organized), added functionality to create a quote from an authenticated user
 Displays all the quotes in our database in the project/view-only-project pages
+
+# Commit nr 10:
+Quotes are now displayed from a single component on both project/view-only-project pages

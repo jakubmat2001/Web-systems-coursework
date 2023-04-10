@@ -10,12 +10,13 @@ router.route('/api/quotes')
   //this ensures that a valid token after an employee is signed-in is detected, except for in our signin route where we're not supposed to have it
   .post(authCtrl.requireSignin.unless({ path: ['/api/auth/signin'] }), authCtrl.setProfile, quoteCtrl.create);
 
-
 router.param('quoteId', quoteCtrl.quoteByID);
 
 router.route('/api/quotes/:quoteId')
-  .put(authCtrl.requireSignin, authCtrl.hasAuthorization, quoteCtrl.update)
-  .delete(authCtrl.requireSignin, authCtrl.hasAuthorization, quoteCtrl.remove);
+  .put(authCtrl.requireSignin, authCtrl.setProfile, authCtrl.hasAuthorization, quoteCtrl.update)
+  .get(authCtrl.requireSignin, authCtrl.setProfile, authCtrl.hasAuthorization, quoteCtrl.read)
+  .delete(authCtrl.requireSignin, authCtrl.setProfile, authCtrl.hasAuthorization, quoteCtrl.remove);
+
 
 router.route('/api/auth/signin') 
   .post(quoteCtrl.create);
