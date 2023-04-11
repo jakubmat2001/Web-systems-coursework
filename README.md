@@ -59,3 +59,6 @@ Finished the app, added ne project tab with different collection
 
 # Commit nr 16:
 made the backend and frontend run from npm build, added pound sign label to display in budget values
+
+# Commit nr 17
+Added more commends on what code does what

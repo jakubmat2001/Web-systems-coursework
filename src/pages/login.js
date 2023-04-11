@@ -18,6 +18,7 @@ export default function Login() {
 
   const navigate = useNavigate();
 
+  //login the user if credentials match from database
   const login = (e) => {
     e.preventDefault();
     console.log('Loging on');

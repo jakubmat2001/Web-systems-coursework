@@ -18,6 +18,7 @@ function DisplayQuotes() {
     fetchQuotes();
   }, []);
 
+  //display returned fields from a database and map it onto a table
   return (
     <div className="container">
       <p className="description">

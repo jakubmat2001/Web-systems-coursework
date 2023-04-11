@@ -13,6 +13,7 @@ function DeleteQuote() {
     setQuoteId(event.target.value);
   };
 
+//send a delete request based on quote ID, if session token doesnt exisit send to login page
   const deleteQuote = (e) => {
     e.preventDefault();
     const token = JSON.parse(sessionStorage.getItem("auth"));
@@ -40,7 +41,7 @@ function DeleteQuote() {
     <div className="container">
       <Header />
       <main id="delete">
-        <div className="form-container"> {/* Add this wrapper div */}
+        <div className="form-container"> 
           <h1>Delete Project Quote</h1>
           {message && <p>{message}</p>}
           <form>

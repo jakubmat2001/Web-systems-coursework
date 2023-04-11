@@ -18,6 +18,7 @@ export default function Signup() {
 
   const navigate = useNavigate();
 
+//signin up the user with name, email, password fields filled in
   const signup = (e) => {
     e.preventDefault();
     console.log('Signing up');

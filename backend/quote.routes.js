@@ -17,6 +17,7 @@ router.route('/api/quotes2')
 router.param('quoteId', quoteCtrl.quoteByID);
 router.param('quoteId2', quoteCtrl.quoteByID2);
 
+//get's employee's info, authorizes them if successful and performs either update/read/remove functions from controller page
 router.route('/api/quotes/:quoteId')
   .put(authCtrl.requireSignin, authCtrl.setProfile, authCtrl.hasAuthorization, quoteCtrl.update)
   .get(authCtrl.requireSignin, authCtrl.setProfile, authCtrl.hasAuthorization, quoteCtrl.read)

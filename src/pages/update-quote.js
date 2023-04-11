@@ -46,6 +46,8 @@ function UpdateQuote() {
     }
   };
 
+  //insert the new values into a database
+  //if values retrived by fetchQuote weren't changed they'll stay the same
   const updateQuote = async (e) => {
     e.preventDefault();
     try {

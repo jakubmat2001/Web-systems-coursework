@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken'
 import config from './db_config.js'
 import expressJwt from 'express-jwt';
 
-
+//sign in the user, create token upon a successful execution, token expires after a while
 const signin = async (req, res) => {
     try {
         let emp = await Emp.findOne({
@@ -57,7 +57,8 @@ const requireSignin = expressJwt({
   userProperty: 'auth',
   algorithms: ['HS256'],
 });
-  
+
+//checks if the employee is authorized based on auth
 const hasAuthorization = (req, res, next) => {
   const authorized = req.profile && req.auth && req.profile._id == req.auth._id;
 

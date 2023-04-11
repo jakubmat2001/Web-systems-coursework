@@ -13,6 +13,5 @@ router.param('empId', empCtrl.empByID)
 router.route('/api/emps/:empId')
   .get(authCtrl.requireSignin, authCtrl.hasAuthorization, empCtrl.read)
   .put(authCtrl.requireSignin, authCtrl.hasAuthorization, empCtrl.update)
-  .delete(authCtrl.requireSignin, authCtrl.hasAuthorization, empCtrl.remove)
 
 export default router

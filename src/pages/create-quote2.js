@@ -62,7 +62,7 @@ function CreateQuote2() {
     <div className="container">
       <Header />
       <main id="detail">
-        <div className="form-container"> {/* Add this wrapper div */}
+        <div className="form-container">
           <h1>Create Project Quote</h1>
           {showQuoteId && (
             <div>

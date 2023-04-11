@@ -46,6 +46,7 @@ const allowCORS = (req, res, next) => {
   next();
 };
 
+//allow these routes to ommit CORS
 app.use('/api/emps', allowCORS);
 app.use('/auth/signin', allowCORS);
 app.use('/api/quotes', allowCORS);

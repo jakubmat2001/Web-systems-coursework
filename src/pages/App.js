@@ -8,6 +8,7 @@ function App() {
   let projectLink = '/project-tab/view-only-project';
   let secondProjectLink = '/second-project-tab/second-view-only-project';
 
+  //if user is loged in (therefore authorized) then replace links with project links with buttons
   if (sessionStorage.getItem('auth')) {
     projectLink = '/project-tab/project';
     secondProjectLink = '/second-project-tab/second-project';
