@@ -40,7 +40,7 @@ function DisplayQuotes() {
               <td>{quote.workHours}</td>
               <td>{quote.workerType}</td>
               <td>{quote.humanResources}</td>
-              <td>{quote.fudgeBudget}</td>
+              <td>£{quote.fudgeBudget}</td>
             </tr>
           ))}
         </tbody>

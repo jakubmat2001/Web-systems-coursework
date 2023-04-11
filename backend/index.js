@@ -1,7 +1,9 @@
-
+import path from 'path';
 import express from 'express';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser'
+import { fileURLToPath } from 'url';
+
 
 import config from './db_config.js'
 import empRoutes from './emp.routes.js'
@@ -38,7 +40,7 @@ app.use(/^\/(api\/emps|auth\/signin|api\/quotes|api\/quotes2)/, (req, res, next)
 });
 
 const allowCORS = (req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.header("Access-Control-Allow-Origin", "http://localhost:8000");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
   res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
   next();
@@ -55,6 +57,18 @@ app.use(bodyParser.urlencoded({ extended: true}))
 app.use('/', empRoutes)
 app.use('/', authRoutes)
 app.use('/', quoteRoutes)
+
+//since our ejs wasn't working with __dirname properly, I found another solution
+//to join frontend with the backend 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const buildPath = path.join(__dirname, '../build');
+
+app.use(express.static(buildPath));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(buildPath, 'index.html'));
+});
 
 app.use((err, req, res, next) => {
   if (err.name === 'UnauthorizedError') {
