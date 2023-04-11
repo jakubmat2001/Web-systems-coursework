@@ -34,15 +34,15 @@ function DisplayQuotes() {
           </tr>
         </thead>
         <tbody>
-        {quotes.map((quote) => (
-          <tr key={quote._id}>
-            <td>{quote.employeeName}</td>
-            <td>{quote.workHours}</td>
-            <td>{quote.workerType}</td>
-            <td>{quote.humanResources}</td>
-            <td>{quote.fudgeBudget}</td>
-          </tr>
-        ))}
+          {quotes.map((quote) => (
+            <tr key={quote._id}>
+              <td>{quote.employeeName}</td>
+              <td>{quote.workHours}</td>
+              <td>{quote.workerType}</td>
+              <td>{quote.humanResources}</td>
+              <td>{quote.fudgeBudget}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>

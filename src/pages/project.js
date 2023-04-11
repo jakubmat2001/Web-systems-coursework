@@ -10,9 +10,9 @@ function Project() {
       <main>
       <h1>Project Quotes</h1>
       <div className="button-grouping">
-          <Link className="button" to="/create-quote">Create Quote</Link>
-          <Link className="button" to="/update-quote">Update Quote</Link>
-          <Link className="button" to="/delete-quote">Delete Quote</Link>
+          <Link className="button" to="/project-tab/project/create-quote">Create Quote</Link>
+          <Link className="button" to="/project-tab/project/update-quote">Update Quote</Link>
+          <Link className="button" to="/project-tab/project/delete-quote">Delete Quote</Link>
       </div>
         <DisplayQuotes />
         
