@@ -62,3 +62,18 @@ made the backend and frontend run from npm build, added pound sign label to disp
 
 # Commit nr 17
 Added more commends on what code does what
+
+# Server running instuctions:
+
+Follow these steps:
+
+1. open terminal from within this directory and type "./run_db.sh" 
+2. open another terminal also from this directory and type "./run_web.sh"
+3. go to http://localhost:8000/
+
+Alternaitive:
+
+1. execute npm install commands in terminal both on backend and src folders
+2. go to src folder and execute npm run build
+3. run a database locally from mongodb
+4. go to backend and type node index.js, then click on http://localhost:8000/ in terminal
