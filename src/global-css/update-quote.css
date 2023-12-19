@@ -1,0 +1,64 @@
+.update-quote-input {
+    margin-left: 65px;
+}
+
+.update-quote-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  .update-quote-form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 60px);
+  }
+  
+  .quote-id-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .update-quote-h1 {
+    text-align: center;
+    margin-top: 0;
+  }
+  
+  .update-quote-label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  input,
+  select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+.update-quote-button {
+    display: block;
+    margin-left: 60px;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .update-quote-button button:hover {
+    background-color: #3e8e41;
+  }
+  
+  .update-quote-button button:active {
+    background-color: #2c6a2f;
+  }
+  

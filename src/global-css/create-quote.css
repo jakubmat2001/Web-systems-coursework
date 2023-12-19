@@ -1,0 +1,62 @@
+.create-quote-input {
+    margin-left: 65px;
+}
+
+.create-quote-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  .create-quote-form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 60px);
+  }
+  
+  .create-id-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .create-quote-h1 {
+    text-align: center;
+    margin-top: 0;
+  }
+  
+  .create-quote-label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  input,
+  select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+.create-quote-button {
+    display: block;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .create-quote-button:hover {
+    background-color: #3e8e41;
+  }
+  
+  .create-quote-button:active {
+    background-color: #2c6a2f;
+  }

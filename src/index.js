@@ -6,30 +6,31 @@ import './index.css';
 
 //component and page imports
 import App from './pages/App.js';
-import ErrorPage from "./components/error-page.js";
+import ErrorPage from "./components/Error-page/error-page.js";
 import Signup from "./pages/signup.js";
 import Login from "./pages/login";
-import Logoff from './components/logoff.js';
-import ValidSignup from './components/signup-success.js';
+import Logoff from './components/Logoff/logoff.js';
+import RequestQuoteReference from './pages/requestQuoteRefrence.js';
+import ValidSignup from './components/SignUpSuccess/signup-success.js';
 
-import ProjectTab from './components/project-tab.js';
-import SecondProjectTab from './components/second-project-tab';
+import ProjectTab from './components/ProjectOneComponents/ProjectTab/project-tab.js';
+import SecondProjectTab from './components/ProjectTwoComponents/SecondProjectTab/second-project-tab.js';
 
-import Project from './pages/project.js';
-import SecondProject from './pages/second-project';
+import Project from './pages/project-1/project.js';
+import SecondProject from './pages/project-2/second-project';
 
-import ViewOnlyPage from './pages/view-only-project.js';
-import SecondViewOnlyPage from './pages/second-view-only-project';
+import ViewOnlyPage from './pages/project-1/view-only-project.js';
+import SecondViewOnlyPage from './pages/project-2/second-view-only-project';
 
 import reportWebVitals from './reportWebVitals';
 import PrivateRoute from './routes/private-route.js';
 
-import CreateQuote from './pages/create-quote';
-import UpdateQuote from './pages/update-quote';
-import DeleteQuote from './pages/delete-quote';
-import CreateQuote2 from './pages/create-quote2';
-import DeleteQuote2 from './pages/delete-quote2';
-import UpdateQuote2 from './pages/update-quote2';
+import CreateQuote from './pages/project-1/create-quote';
+import UpdateQuote from './pages/project-1/update-quote';
+import DeleteQuote from './pages/project-1/delete-quote';
+import CreateQuote2 from './pages/project-2/create-quote2.js';
+import DeleteQuote2 from './pages/project-2/delete-quote2';
+import UpdateQuote2 from './pages/project-2/update-quote2';
 
 
 //added a better router which looks cleaner therefore easier to work with
@@ -37,10 +38,11 @@ const router = (
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<App />} errorElement={<ErrorPage />} />
+      <Route path='/request-quote-reference' element={<RequestQuoteReference/>} />
       <Route path="/project-tab" element={<ProjectTab />} />
-      <Route path="/second-project-tab" element={<SecondProjectTab />} />
-
       <Route path="/project-tab/project" element={<Project />} />
+
+      <Route path="/second-project-tab" element={<SecondProjectTab />} />
       <Route path="/second-project-tab/second-project" element={<SecondProject />} />
       
       <Route path="/project-tab/view-only-project" element={<ViewOnlyPage />} />
@@ -54,6 +56,7 @@ const router = (
       <Route path='/project-tab/project/create-quote' element={<CreateQuote/>}/>
       <Route path='/project-tab/project/update-quote' element={<UpdateQuote/>}/>
       <Route path='/project-tab/project/delete-quote' element={<DeleteQuote/>}/>
+      
       <Route path='/second-project-tab/second-project/second-create-quote' element={<CreateQuote2/>}/>
       <Route path='/second-project-tab/second-project/second-update-quote' element={<UpdateQuote2/>}/>
       <Route path='/second-project-tab/second-project/second-delete-quote' element={<DeleteQuote2/>}/>

@@ -2,14 +2,13 @@ import path from 'path';
 import express from 'express';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser'
+import cors from 'cors';
 import { fileURLToPath } from 'url';
 
-
-import config from './db_config.js'
-import empRoutes from './emp.routes.js'
-import authRoutes from './auth.routes.js'
-import quoteRoutes from './quote.routes.js';
-
+import config from './controllers/db_config.js'
+import empRoutes from './controllers/emp.routes.js'
+import authRoutes from './controllers/auth.routes.js'
+import quoteRoutes from './controllers/quote.routes.js';
 
 const PORT = config.port;
 const MONGOURI = config.mongoUri;
@@ -30,6 +29,7 @@ mongoose.connection.once('open', () => {
 });
 
 var app = express();
+app.use(cors());
 
 //applied CORS to multiple routes
 app.use(/^\/(api\/emps|auth\/signin|api\/quotes|api\/quotes2)/, (req, res, next) => {
@@ -38,19 +38,6 @@ app.use(/^\/(api\/emps|auth\/signin|api\/quotes|api\/quotes2)/, (req, res, next)
   res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
   next();
 });
-
-const allowCORS = (req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "http://localhost:8000");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-  res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
-  next();
-};
-
-//allow these routes to ommit CORS
-app.use('/api/emps', allowCORS);
-app.use('/auth/signin', allowCORS);
-app.use('/api/quotes', allowCORS);
-app.use('/api/quotes2', allowCORS);
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true}))

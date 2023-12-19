@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import '../css/log-signup.css';
+import '../global-css/signup.css';
 
 export default function Signup() {
   const [values, setValues] = useState({
@@ -18,7 +18,7 @@ export default function Signup() {
 
   const navigate = useNavigate();
 
-//signin up the user with name, email, password fields filled in
+  //signin up the user with name, email, password fields filled in
   const signup = (e) => {
     e.preventDefault();
     console.log('Signing up');
@@ -29,28 +29,32 @@ export default function Signup() {
       navigate('/signup-success');
     });
   };
-  
+
   return (
-    <div id="fillin-form">
-      <form>
-      <label>
-          Name:
-          <input type="text" name="name" onChange={handleChange('name')}/>
-        </label>
-        <br></br>
-        <label>
-          e-mail:
-          <input type="text" name="email" onChange={handleChange('email')}/>
-        </label>
-        <br></br>
-        <label>
-          Password:
-          <input type="text" name="password" onChange={handleChange('password')} />
-        </label>
-        <br></br>
-        <input type="submit" value="Submit" onClick={signup} />
-      </form>
+    <div id="credential-form-fillin-form-display">
+      <div className='credential-form-form-wrapper'>
+        <div className='credential-form-form-heading'>
+          <h2>Register Account</h2>
+        </div>
+        <form className='credential-form'>
+          <label>
+            Name:
+            <input type="text" name="name" onChange={handleChange('name')} />
+          </label>
+          <br></br>
+          <label>
+            e-mail:
+            <input type="text" name="email" onChange={handleChange('email')} />
+          </label>
+          <br></br>
+          <label>
+            Password:
+            <input type="text" name="password" onChange={handleChange('password')} />
+          </label>
+          <br></br>
+          <input type="submit" value="Submit" onClick={signup} />
+        </form>
+      </div>
     </div>
   );
 }
-  
