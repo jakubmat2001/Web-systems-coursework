@@ -1,6 +1,6 @@
 import createQuoteSchema from './quote.model.js';
-import errorHandler from './dbErrorHandler.js';
-import { calculateBudget, calcFudgeBudget } from './calc_budget.js';
+import errorHandler from '../dbErrorHandler.js';
+import { calculateBudget, calcFudgeBudget } from '../calc_budget.js';
 
 const Quoote = createQuoteSchema('quotes');
 const Quote2 = createQuoteSchema('quotes2');
@@ -8,29 +8,42 @@ const Quote2 = createQuoteSchema('quotes2');
 const create = async (req, res) => {
   const { employeeName, workHours, workerType, humanResources } = req.body;
   const empId = req.profile._id;
-  
-  const budget = calculateBudget(workHours, workerType, humanResources);
-  const fudgeBudget = calcFudgeBudget(budget);
 
-  //if human resources from our form are null, set the value to 0 as default
-  //add the human resources to the budget if any
-  const quote = new Quoote({
-    employeeName,
-    workHours,
-    workerType,
-    humanResources: humanResources || 0, 
-    budget: budget,
-    fudgeBudget: fudgeBudget,
-    empId,
-  });
-
-  try {
-    await quote.save();
-    res.status(200).json({ message: 'Quote created successfully', quote });
-  } catch (err) {
-    res.status(400).json({ error: errorHandler.getErrorMessage(err) });
+  const checkIfEmpInSchema = await empIdInSchema(empId)
+  if (!checkIfEmpInSchema) {
+    const budget = calculateBudget(workHours, workerType, humanResources);
+    const fudgeBudget = calcFudgeBudget(budget);
+    //if human resources from our form are null, set the value to 0 as default
+    //add the human resources to the budget if any
+    const quote = new Quoote({
+      employeeName,
+      workHours,
+      workerType,
+      humanResources: humanResources || 0,
+      budget: budget,
+      fudgeBudget: fudgeBudget,
+      empId,
+    });
+    try {
+      await quote.save();
+      res.status(200).json({ message: 'Quote created successfully', quote });
+    } catch (err) {
+      res.status(400).json({ error: errorHandler.getErrorMessage(err) });
+    }
+  } else {
+    return res.status(400).json({ error: 'One Quote Per User' })
   }
 };
+
+// Check if the empId already exists in schema
+const empIdInSchema = async (empId) => {
+  let emp = await Quoote.find({ empId: empId }).exec();
+  if (emp.length > 0) {
+    return true
+  }
+  return false
+};
+
 //this fucntion is to display all the quotes in our project.js and view-only-project.js
 const list = async (req, res) => {
   try {
@@ -49,11 +62,11 @@ const update = async (req, res) => {
         error: "Quote not found",
       });
     }
-//attached the employeeId to the request object
+    //attached the employeeId to the request object
     req.quoteEmployeeId = quote.empId;
 
-  //ensure we update our budget upon new values being entered
- //saves the original budget to database along with out modified fudgebudget
+    //ensure we update our budget upon new values being entered
+    //saves the original budget to database along with out modified fudgebudget
     const updatedBudget = calculateBudget(req.body.workHours, req.body.workerType, req.body.humanResources);
     const updated_fudge_budget = calcFudgeBudget(updatedBudget);
     quote.budget = updatedBudget;
@@ -63,14 +76,10 @@ const update = async (req, res) => {
 
     await quote.save();
     res.status(200).json(quote);
-
   } catch (err) {
-    
     res.status(400).json({ error: errorHandler.getErrorMessage(err) });
   }
-  
 };
-
 
 //read a single quote
 const read = (req, res) => {
@@ -104,35 +113,46 @@ const quoteByID = async (req, res, next, id) => {
   }
 };
 
-
 ////////////////////////////////////////////////For Quote 2 collection ///////////////////////////////////////////////////
-
 //functionalites for the second collection used for our second project, not the most ideal
 const create2 = async (req, res) => {
   const { employeeName, workHours, workerType, humanResources } = req.body;
   const empId = req.profile._id;
-  
-  const budget = calculateBudget(workHours, workerType, humanResources);
-  const fudgeBudget = calcFudgeBudget(budget);
 
-  const quote = new Quote2({
-    employeeName,
-    workHours,
-    workerType,
-    humanResources: humanResources || 0, 
-    budget: budget,
-    fudgeBudget: fudgeBudget,
-    empId,
-  });
+  const checkIfEmpInSchema = await empIdInSchema2(empId)
+  if (!checkIfEmpInSchema) {
+    const budget = calculateBudget(workHours, workerType, humanResources);
+    const fudgeBudget = calcFudgeBudget(budget);
 
-  try {
-    await quote.save();
-    res.status(200).json({ message: 'Quote created successfully', quote });
-  } catch (err) {
-    res.status(400).json({ error: errorHandler.getErrorMessage(err) });
+    const quote = new Quote2({
+      employeeName,
+      workHours,
+      workerType,
+      humanResources: humanResources || 0,
+      budget: budget,
+      fudgeBudget: fudgeBudget,
+      empId,
+    });
+
+    try {
+      await quote.save();
+      res.status(200).json({ message: 'Quote created successfully', quote });
+    } catch (err) {
+      res.status(400).json({ error: errorHandler.getErrorMessage(err) });
+    }
+  } else {
+    return res.status(400).json({ error: 'One Quote Per User' })
   }
 };
 
+// Check if the empId already exists in schema
+const empIdInSchema2 = async (empId) => {
+  let emp = await Quote2.find({ empId: empId }).exec();
+  if (emp.length > 0) {
+    return true
+  }
+  return false
+};
 
 const list2 = async (req, res) => {
   try {
@@ -160,8 +180,7 @@ const update2 = async (req, res) => {
     quote.fudgeBudget = updated_fudge_budget;
     quote = Object.assign(quote, req.body);
     quote.updated = Date.now();
-
-
+    
     await quote.save();
     res.status(200).json(quote);
 

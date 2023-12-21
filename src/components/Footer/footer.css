@@ -4,13 +4,16 @@
     height: 10%;
     display: flex;
     background-color: #4CAF50;
-    margin-bottom: auto;
+    margin-top: auto;
+
 }
 
 .footer-bar-content {
     width: 100%;
     display: flex;
     justify-content: space-between;
+    margin-bottom: auto;
+
 }
 
 .copyright {

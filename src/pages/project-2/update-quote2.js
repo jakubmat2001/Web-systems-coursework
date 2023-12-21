@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../../global-css/update-quote.css'
@@ -14,6 +14,14 @@ function UpdateQuote2() {
     workerType: '',
     humanResources: '',
   });
+
+  useEffect(() => {
+    const getAuth = sessionStorage.getItem("auth");
+    const parsedAuthData = JSON.parse(getAuth);
+    const empName = parsedAuthData.emp.name
+    console.log(empName)
+    setValues({ ...values, employeeName: empName })
+  }, [])
 
   const navigate = useNavigate();
 
@@ -67,7 +75,7 @@ function UpdateQuote2() {
   return (
     <div className="container">
       <Header />
-      <main id="detail">
+      <main className='standard-main'>
         <div className="update-quote-form-container">
           <h1 className="update-quote-h1">Update Project Quote</h1>
           <div className="quote-id-container">
@@ -87,6 +95,7 @@ function UpdateQuote2() {
                   type="text"
                   value={values.employeeName}
                   onChange={handleChange('employeeName')}
+                  disabled
                 />
               </label>
               <br />
@@ -118,9 +127,11 @@ function UpdateQuote2() {
                 />
               </label>
               <br />
+              <div className='update-quote-button-container'>
               <button className="update-quote-button" type="submit" value="Submit" onClick={updateQuote}>
                 Update Quote
               </button>
+            </div>
             </form>
           )}
         </div>

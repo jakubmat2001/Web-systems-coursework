@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios, { formToJSON } from 'axios';
+import axios from 'axios';
 import Header from '../../components/Header/header';
 import Footer from '../../components/Footer/footer.js'
 //we can reuse update-quote for this due to both being identical in structure
@@ -20,6 +20,13 @@ function CreateQuote2() {
   //then change the state to true to dusplay it on a page
   const [quoteId, setQuoteId] = useState(null);
   const [showQuoteId, setShowQuoteId] = useState(false);
+
+  useEffect(() => {
+    const getAuth = sessionStorage.getItem("auth");
+    const parsedAuthData = JSON.parse(getAuth);
+    const empName = parsedAuthData.emp.name
+    setValues({ ...values, employeeName: empName })
+  }, [])
 
   const handleChange = (name) => (event) => {
     setValues({ ...values, [name]: event.target.value });
@@ -62,7 +69,7 @@ function CreateQuote2() {
   return (
     <div className="create-quote-container">
       <Header />
-      <main id="detail">
+      <main className='standard-main'>
         <div className="create-quote-form-container">
           <h1 className='create-quote-h1'>Create Project Quote</h1>
           {showQuoteId && (
@@ -79,6 +86,7 @@ function CreateQuote2() {
                 type="text"
                 value={values.employeeName}
                 onChange={handleChange('employeeName')}
+                disabled
               />
             </label>
             <br />
@@ -111,7 +119,11 @@ function CreateQuote2() {
               />
             </label>
             <br />
-            <button className="create-quote-button" type="submit" value="Submit" onClick={create_q}>Create Quote</button>
+            <div className='create-quote-button-container'>
+              <button className="create-quote-button" type="submit" value="Submit" onClick={create_q}>
+                Create Quote
+              </button>
+            </div>
           </form>
         </div>
       </main>

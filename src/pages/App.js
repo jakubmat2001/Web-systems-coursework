@@ -20,7 +20,14 @@ function App() {
   return (
     <div className="container">
       <Header />
-      <main>
+      <main className='homepage-main'>
+        <div className='spash-text'>
+          <h1>Quote Calculator</h1>
+          <div className='paragraph-container'>
+            <p>Go ahead and click on one of the projects your most intrested working on. See if your competition is bidding you out
+              and create your own bid for a project by signin-up to our website </p>
+          </div>
+        </div>
         <div id='project-container'>
           <SquareTab name="Project Nr 1" buttonText={projectText} link={projectLink} />
           <SecondSquareTab name="Project Nr 2" buttonText={projectText} link={secondProjectLink} />

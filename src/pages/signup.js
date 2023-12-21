@@ -31,28 +31,28 @@ export default function Signup() {
   };
 
   return (
-    <div id="credential-form-fillin-form-display">
+    <div className="credential-form-fillin-form-display">
       <div className='credential-form-form-wrapper'>
         <div className='credential-form-form-heading'>
           <h2>Register Account</h2>
         </div>
         <form className='credential-form'>
-          <label>
+          <label className='sign-label'>
             Name:
-            <input type="text" name="name" onChange={handleChange('name')} />
+            <input className='sign-input' type="text" name="name" onChange={handleChange('name')} />
           </label>
           <br></br>
-          <label>
+          <label className='sign-label'>
             e-mail:
-            <input type="text" name="email" onChange={handleChange('email')} />
+            <input className='sign-input' type="text" name="email" onChange={handleChange('email')} />
           </label>
           <br></br>
-          <label>
+          <label className='sign-label'>
             Password:
-            <input type="text" name="password" onChange={handleChange('password')} />
+            <input className='sign-input' type="text" name="password" onChange={handleChange('password')} />
           </label>
           <br></br>
-          <input type="submit" value="Submit" onClick={signup} />
+          <input className='sign-submit' type="submit" value="Submit" onClick={signup} />
         </form>
       </div>
     </div>

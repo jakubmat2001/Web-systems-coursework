@@ -24,9 +24,7 @@ export default function Login() {
     console.log('Loging on');
     let data = { email: values.email, password: values.password };
     var requestURI = 'http://127.0.0.1:8000/auth/signin';
-    console.log(requestURI);
     axios.post(requestURI, data).then((response) => {
-      console.log('Setting JWT in storage');
       sessionStorage.setItem('auth', JSON.stringify(response.data));
       setValues({ ...values, 'authorised': true })
       navigate('/');
@@ -36,25 +34,24 @@ export default function Login() {
       });
   };
 
-
   return (
-    <div id="credential-form-fillin-form-display">
+    <div className="credential-form-fillin-form-display">
       <div className='credential-form-form-wrapper'>
         <div className='credential-form-form-heading'>
           <h2>Login</h2>
         </div>
         <form className='credential-form'>
-          <label >
+          <label className='sign-label'>
             e-mail:
-            <input type="text" name="email" onChange={handleChange('email')} />
+            <input className='sign-input' type="text" name="email" onChange={handleChange('email')} />
           </label>
           <br></br>
-          <label>
+          <label className='sign-label'>
             Password:
-            <input type="text" name="password" onChange={handleChange('password')} />
+            <input className='sign-input' type="text" name="password" onChange={handleChange('password')} />
           </label>
           <br></br>
-          <input type="submit" value="Submit" onClick={login} />
+          <input className='sign-input' type="submit" value="Submit" onClick={login} />
         </form>
       </div>
     </div>

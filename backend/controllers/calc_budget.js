@@ -27,6 +27,5 @@ export function calculateBudget(workHours, workerType, humanResources) {
 export function calcFudgeBudget(budget) {
   const randomMultiplier = 0.5 + Math.random();
   const fudgeBudget = budget * randomMultiplier;
-  console.log(fudgeBudget)
   return parseFloat(fudgeBudget.toFixed(2));
 }  

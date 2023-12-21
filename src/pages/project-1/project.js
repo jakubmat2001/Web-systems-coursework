@@ -9,7 +9,7 @@ function Project() {
   return (
     <div className='container'>
         <Header />
-        <main>
+        <main className='standard-main'>
           <h1>Project Quotes</h1>
           <div className="button-grouping">
             <Link className="button" to="/project-tab/project/create-quote">Create Quote</Link>

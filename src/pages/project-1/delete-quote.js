@@ -41,7 +41,7 @@ function DeleteQuote() {
   return (
     <div className="delete-quote-container">
       <Header />
-      <main id="delete">
+      <main className='standard-main'>
         <div className="delete-quote-form-container"> 
           <h1 className='delete-quote-h1'>Delete Project Quote</h1>
           {message && <p>{message}</p>}
@@ -57,7 +57,9 @@ function DeleteQuote() {
               />
             </label>
             <br />
-            <button className='delete-quote-btn' type="submit" onClick={deleteQuote}>Delete Quote</button>
+            <div className='delete-quote-button-container'>
+              <button className='delete-quote-btn' type="submit" onClick={deleteQuote}>Delete Quote</button>
+            </div>
           </form>
         </div>
       </main>

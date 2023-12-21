@@ -40,7 +40,7 @@ function SecondDisplayQuotes() {
                             <td>{quote.employeeName}</td>
                             <td>{quote.workHours}</td>
                             <td>{quote.workerType}</td>
-                            <td>{quote.humanResources}</td>
+                            <td>£{quote.humanResources}</td>
                             <td>£{quote.fudgeBudget}</td>
                         </tr>
                     ))}

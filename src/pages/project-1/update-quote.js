@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../../global-css/update-quote.css'
@@ -14,6 +14,14 @@ function UpdateQuote() {
     workerType: '',
     humanResources: '',
   });
+
+  useEffect(() => {
+    const getAuth = sessionStorage.getItem("auth");
+    const parsedAuthData = JSON.parse(getAuth);
+    const empName = parsedAuthData.emp.name
+    console.log(empName)
+    setValues({ ...values, employeeName: empName })
+  }, [])
 
   const navigate = useNavigate();
 
@@ -65,67 +73,68 @@ function UpdateQuote() {
     }
   };
 
-
   return (
     <div className="container">
       <Header />
-      <main id="detail">
-        <div className="update-quote-form-container">
-          <h1 className="update-quote-h1">Update Project Quote</h1>
-          <div className="quote-id-container">
+      <main className='standard-main'>
+      <div className="update-quote-form-container">
+        <h1 className="update-quote-h1">Update Project Quote</h1>
+        <div className="quote-id-container">
+          <label className="update-quote-label">
+            Quote ID:
+          </label>
+          <input className="update-quote-input" type="text" value={quoteId} onChange={handleQuoteIdChange} />
+          <button className="fetch-update-quote-button" type="button" onClick={fetchQuote}>
+            Fetch Quote
+          </button>
+        </div>
+        {quote && (
+          <form className="form">
             <label className="update-quote-label">
-              Quote ID:
+              Employee Name:
+              <input
+                type="text"
+                value={values.employeeName}
+                disabled
+              />
             </label>
-            <input className="update-quote-input" type="text" value={quoteId} onChange={handleQuoteIdChange} />
-            <button className="update-quote-button" type="button" onClick={fetchQuote}>
-              Fetch Quote
-            </button>
-          </div>
-          {quote && (
-            <form className="form">
-              <label className="update-quote-label">
-                Employee Name:
-                <input
-                  type="text"
-                  value={values.employeeName}
-                  onChange={handleChange('employeeName')}
-                />
-              </label>
-              <br />
-              <label className="update-quote-label">
-                Work Hours:
-                <input
-                  type="number"
-                  value={values.workHours}
-                  onChange={handleChange('workHours')}
-                />
-              </label>
-              <br />
-              <label className="update-quote-label">
-                Worker Type:
-                <select value={values.workerType} onChange={handleChange('workerType')}>
-                  <option value="junior">Junior</option>
-                  <option value="mid-senior">Mid-Senior</option>
-                  <option value="senior">Senior</option>
-                </select>
-              </label>
-              <br />
-              <label className="update-quote-label">
-                Human Resources:
-                <input
-                  placeholder='Enter Your Saved Quote Reference'
-                  type="number"
-                  value={values.humanResources}
-                  onChange={handleChange('humanResources')}
-                />
-              </label>
-              <br />
+            <br />
+            <label className="update-quote-label">
+              Work Hours:
+              <input
+                type="number"
+                value={values.workHours}
+                onChange={handleChange('workHours')}
+              />
+            </label>
+            <br />
+            <label className="update-quote-label">
+              Worker Type:
+              <select value={values.workerType} onChange={handleChange('workerType')}>
+                <option value="junior">Junior</option>
+                <option value="mid-senior">Mid-Senior</option>
+                <option value="senior">Senior</option>
+              </select>
+            </label>
+            <br />
+            <label className="update-quote-label">
+              Human Resources:
+              <input
+                placeholder='Enter Your Saved Quote Reference'
+                type="number"
+                value={values.humanResources}
+                onChange={handleChange('humanResources')}
+              />
+            </label>
+            <br />
+            <div className='update-quote-button-container'>
               <button className="update-quote-button" type="submit" value="Submit" onClick={updateQuote}>
                 Update Quote
               </button>
-            </form>
-          )}
-        </div>
+            </div>
+          </form>
+        )}
+      </div>
       </main>
       <Footer />
     </div>

@@ -9,7 +9,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: calc(100vh - 60px);
+  min-height:90vh;
 }
 
 .delete-quote-h1  {
@@ -28,6 +28,11 @@
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 16px;
+}
+
+.delete-quote-button-container {
+  display: flex;
+  justify-content: center;
 }
 
 .delete-quote-btn  {

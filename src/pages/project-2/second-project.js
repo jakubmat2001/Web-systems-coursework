@@ -9,7 +9,7 @@ function SecondProject() {
   return (
     <div className='container'>
       <Header />
-      <main>
+      <main className='standard-main'>
         <h1>Second Project Quotes</h1>
         <div className="button-grouping">
           <Link className="button" to="/second-project-tab/second-project/second-create-quote">Create Quote</Link>

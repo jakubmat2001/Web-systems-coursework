@@ -1,9 +1,9 @@
-import Emp from './emp.models.js'
+import Emp from '../emp/emp.models.js'
 import jwt from 'jsonwebtoken'
-import config from './db_config.js'
+import config from '../db_config.js'
 import expressJwt from 'express-jwt';
 
-//sign in the user, create token upon a successful execution, token expires after a while
+//sign in the user, create token upon a successful execution, token expires after set duration
 const signin = async (req, res) => {
     try {
         let emp = await Emp.findOne({

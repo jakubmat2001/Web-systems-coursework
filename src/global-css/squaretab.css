@@ -3,8 +3,9 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 200px;
-    height: 200px;
+    min-width: 200px;
+    min-height: 200px;
+    margin: 1rem;
     background-color: #f2f2f2;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -18,11 +19,13 @@
   .square-tab button {
     background-color: #4CAF50;
     border: none;
+    border-radius: 10px;
     color: white;
     padding: 10px 20px;
     text-decoration: none;
     font-size: 16px;
     transition: all 0.4s ease;
+    cursor: pointer;
   }
   
   .square-tab button:hover {

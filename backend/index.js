@@ -6,9 +6,9 @@ import cors from 'cors';
 import { fileURLToPath } from 'url';
 
 import config from './controllers/db_config.js'
-import empRoutes from './controllers/emp.routes.js'
-import authRoutes from './controllers/auth.routes.js'
-import quoteRoutes from './controllers/quote.routes.js';
+import empRoutes from './controllers/emp/emp.routes.js'
+import authRoutes from './controllers/auth/auth.routes.js'
+import quoteRoutes from './controllers/quote/quote.routes.js';
 
 const PORT = config.port;
 const MONGOURI = config.mongoUri;

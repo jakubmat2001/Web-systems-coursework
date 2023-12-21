@@ -6,7 +6,8 @@ function ViewOnlyPage() {
   return (
     <div className="container">
       <Header />
-      <main id="detail">
+      <main className='standard-main'>
+      <h1>Project Quotes (View Only)</h1>
         <DisplayQuotes />
       </main>
       <Footer />

@@ -1,5 +1,5 @@
 import Emp from './emp.models.js'
-import errorHandler from './dbErrorHandler.js'
+import errorHandler from '../dbErrorHandler.js'
 
 //create an employee account
 const create = async (req, res) => {
