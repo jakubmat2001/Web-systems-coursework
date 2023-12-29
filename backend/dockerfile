@@ -1,0 +1,7 @@
+FROM node:18.19.0
+
+
+WORKDIR /usr/src/quote-calculator-backend
+COPY  ./ ./
+RUN npm install
+CMD ["/bin/bash"]

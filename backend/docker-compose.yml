@@ -1,0 +1,25 @@
+version: '3.6'
+
+services:
+  quote-calculator-backend:
+    container_name: quote-calculator
+    build: ./
+    command: npm start
+    working_dir: /usr/src/quote-calculator-backend
+    environment:
+      MONGO_URI: mongodb://mongo-db:27017/employeeDB/
+    links:
+      - mongo-db
+    ports:
+      - "8000:8000"
+
+
+  mongo-db:
+    container_name: mongo-container
+    image: mongo
+    ports:
+      - "27017:27017"
+  
+
+
+    
